@@ -2,48 +2,46 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public Interactable focus;
+    public PickupInteractable focusPickup;
+    public ActivityInteractable focusActivity;
 
     
     private void OnTriggerEnter(Collider other)
     {
-        Interactable interactable = other.GetComponent<Interactable>();
-        if (interactable != null && interactable.currentInteraction == Interactable.interactionType.Activity)
+        ActivityInteractable activityInteractable = other.GetComponent<ActivityInteractable>();
+        if (activityInteractable != null)
         {
-            SetFocus(interactable);
+            SetFocusActivity(activityInteractable);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        Interactable interactable=other.GetComponent<Interactable>();
-        if(interactable != null && interactable.currentInteraction == Interactable.interactionType.Activity)
+        ActivityInteractable activityInteractable = other.GetComponent<ActivityInteractable>();
+        if(activityInteractable != null)
         {
-            RemoveFocus();
+            RemoveFocusActivity();
         }
     }
-    void SetFocus(Interactable newFocus)
+    void SetFocusActivity(ActivityInteractable newActivityFocus)
     {
-        if(newFocus != focus)
+        if(newActivityFocus != focusActivity)
         {
-            if(focus != null)
+            if(focusActivity != null)
             {
-                focus.OnDefocused();
+                focusActivity.OnDefocused();
             }
-            focus = newFocus;
+            focusActivity = newActivityFocus;
 
         }
-        newFocus.OnFocused(transform);
+        newActivityFocus.OnFocused(transform);
     }
-    void RemoveFocus()
+    void RemoveFocusActivity()
     {
-        if (focus != null)
+        if (focusActivity != null)
         {
-            focus.OnDefocused();
+            focusActivity.OnDefocused();
         }
-        focus = null;
+        focusActivity = null;
     }
-    public void OnPickup()
-    {
-        RemoveFocus();
-    }
+    
 }

@@ -1,14 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
-public class Interactable : MonoBehaviour
+[RequireComponent(typeof(MeshCollider))]
+public class PickupInteractable : MonoBehaviour
 {
     public float radius = 1f;
     bool isFocus = false;
-    Transform player;
+    protected Transform player;
     public bool hasInteracted = false;
-    public enum interactionType { Weapon, PickUp, Activity};
-    public interactionType currentInteraction;
+
+    public enum PickupType { Weapon, PickupItem}
+    public PickupType currentPickupType;
 
     public virtual void Interact()
     {
@@ -16,8 +17,7 @@ public class Interactable : MonoBehaviour
     }
     private void Start()
     {
-        GetComponent<SphereCollider>().radius = radius;
-        GetComponent<SphereCollider>().isTrigger = true;
+        GetComponent<MeshCollider>().isTrigger = true;
     }
     private void Update()
     {
@@ -33,7 +33,7 @@ public class Interactable : MonoBehaviour
         {
             if(player != null)
             {
-                player.GetComponent<PlayerInteraction>().OnPickup();
+                player.GetComponent<PlayerInteraction>();
             }
         }
     }
