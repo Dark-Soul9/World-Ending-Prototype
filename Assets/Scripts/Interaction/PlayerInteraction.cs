@@ -21,6 +21,10 @@ public class PlayerInteraction : MonoBehaviour
                     RemoveFocusPickup();
                 }
             }
+            else
+            {
+                RemoveFocusActivity();
+            }
         }
         else if(IsItemInRange())
         {
@@ -104,7 +108,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             return false;
         }
-
     }
     
 }

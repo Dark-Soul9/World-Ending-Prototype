@@ -12,7 +12,7 @@ public class ActivityInteractable : MonoBehaviour
 
     public virtual void Interact()
     {
-        //hasInteracted = true;
+        hasInteracted = true;
     }
     private void Start()
     {

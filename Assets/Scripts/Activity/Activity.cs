@@ -14,7 +14,11 @@ public class Activity : ActivityInteractable
     void StartActivity()
     {
         input = player.GetComponent<StarterAssetsInputs>();
-        if(input != null && input.interact)
+        if (hasInteracted)
+        {
+            input.interact = false;
+        }
+        if (input != null && input.interact)
         {
             if(currentActivityType == ActivityType.FadeToBlack)
             {
@@ -30,12 +34,10 @@ public class Activity : ActivityInteractable
     void FadeToBlack()
     {
         Debug.Log("Has Interacted with FadeToBlack Activity");
-        hasInteracted = true;
     }
 
     void AnimatedActivity()
     {
         Debug.Log("Has Interacted with Animated Activity");
-        hasInteracted = true;
     }
 }

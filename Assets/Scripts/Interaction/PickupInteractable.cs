@@ -1,8 +1,11 @@
+using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem.Layouts;
 
 [RequireComponent(typeof(BoxCollider))]
 public class PickupInteractable : MonoBehaviour
 {
+    private StarterAssetsInputs input;
     public float radius = 2f;
     bool isFocus = false;
     protected Transform player;
@@ -13,7 +16,7 @@ public class PickupInteractable : MonoBehaviour
 
     public virtual void Interact()
     {
-        //hasInteracted = true;
+        hasInteracted = true;
     }
     private void Start()
     {
@@ -22,10 +25,13 @@ public class PickupInteractable : MonoBehaviour
     }
     private void Update()
     {
-        if(isFocus && !hasInteracted)
+        if(player != null)
         {
-            float distance = Vector3.Distance(player.position, transform.position);
-            if(distance <= radius)
+            if (hasInteracted)
+            {
+                input.interact = false;
+            }
+            if (isFocus && !hasInteracted && input.interact && input != null)
             {
                 Interact();
             }
@@ -36,6 +42,10 @@ public class PickupInteractable : MonoBehaviour
     {
         isFocus = true;
         player = playerTransform;
+        if(input == null)
+        {
+            input = player.GetComponent<StarterAssetsInputs>();
+        }
         hasInteracted = false;
     }
     public void OnDefocused()
