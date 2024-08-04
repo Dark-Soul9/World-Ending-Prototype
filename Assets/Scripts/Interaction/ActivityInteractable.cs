@@ -28,10 +28,6 @@ public class ActivityInteractable : MonoBehaviour
                 Interact();
             }
         }
-        else
-        {
-            Debug.Log("Not Happening");
-        }
     }
 
     public void OnFocused(Transform playerTransform)

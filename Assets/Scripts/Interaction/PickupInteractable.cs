@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(BoxCollider))]
 public class PickupInteractable : MonoBehaviour
 {
-    public float radius = 1f;
+    public float radius = 2f;
     bool isFocus = false;
     protected Transform player;
     public bool hasInteracted = false;
@@ -17,7 +17,8 @@ public class PickupInteractable : MonoBehaviour
     }
     private void Start()
     {
-        GetComponent<MeshCollider>().isTrigger = true;
+        GetComponent<BoxCollider>().isTrigger = true;
+        GetComponent<BoxCollider>().size += Vector3.up;
     }
     private void Update()
     {
@@ -27,13 +28,6 @@ public class PickupInteractable : MonoBehaviour
             if(distance <= radius)
             {
                 Interact();
-            }
-        }
-        else
-        {
-            if(player != null)
-            {
-                player.GetComponent<PlayerInteraction>();
             }
         }
     }

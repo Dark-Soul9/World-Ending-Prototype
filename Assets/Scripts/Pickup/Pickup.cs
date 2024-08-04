@@ -2,7 +2,7 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Activity : ActivityInteractable
+public class Pickup : PickupInteractable
 {
     private StarterAssetsInputs input;
 
@@ -16,26 +16,26 @@ public class Activity : ActivityInteractable
         input = player.GetComponent<StarterAssetsInputs>();
         if(input != null && input.interact)
         {
-            if(currentActivityType == ActivityType.FadeToBlack)
+            if(currentPickupType == PickupType.Weapon)
             {
-                FadeToBlack();
+                AddToWeapons();
             }
-            else if(currentActivityType == ActivityType.Animated)
+            else if(currentPickupType == PickupType.PickupItem)
             {
-                AnimatedActivity();
+                AddToPickup();
             }
         }
     }
 
-    void FadeToBlack()
+    void AddToWeapons()
     {
-        Debug.Log("Has Interacted with FadeToBlack Activity");
+        Debug.Log("Has Added To Weapons");
         hasInteracted = true;
     }
 
-    void AnimatedActivity()
+    void AddToPickup()
     {
-        Debug.Log("Has Interacted with Animated Activity");
+        Debug.Log("Has Added to Pickup");
         hasInteracted = true;
     }
 }
